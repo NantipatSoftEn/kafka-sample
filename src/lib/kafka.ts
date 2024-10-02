@@ -3,13 +3,13 @@ import { Kafka } from 'kafkajs';
 
 const kafka = new Kafka({
   clientId: 'my-app',
-  brokers: ['localhost:9092'] // แก้ไขเป็นที่อยู่ broker ของคุณ
+  brokers: ['localhost:9094'] // แก้ไขเป็นที่อยู่ broker ของคุณ
 });
 
 const producer = kafka.producer();
 const consumer = kafka.consumer({ groupId: 'test-group' });
 
-const run = async () => {
+export const run = async () => {
   // รัน Producer
   await producer.connect();
   console.log('Producer connected');
@@ -28,7 +28,7 @@ const run = async () => {
   });
 };
 
-run().catch(console.error);
+// run().catch(console.error);
 
 // ส่งข้อความ
 export const sendMessage = async (message: string) => {

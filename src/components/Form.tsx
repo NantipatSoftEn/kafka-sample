@@ -5,25 +5,24 @@ export const  Form = ()  => {
 
   const sendMessage = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    console.log("e",e)
-    // try {
-    //   const response = await fetch('http://localhost:4321/api/send', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ message }),
-    //   });
+    try {
+      const response = await fetch('http://localhost:4321/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
 
-    //   const result = await response.json();
-    //   console.log('Result:', result);
-    //   if (result.success) {
-    //     alert('Message sent successfully!');
-    //     setMessage('');
-    //   }
-    // } catch (error) {
-    //   console.error('Error sending message:', error);
-    // }
+      const result = await response.json();
+      console.log('Result:', result);
+      if (result.message) {
+        alert('Message sent successfully!');
+        setMessage(result.message);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
   };
 
   return (
