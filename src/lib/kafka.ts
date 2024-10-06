@@ -28,6 +28,22 @@ export const run = async () => {
   });
 };
 
+
+
+export const startKafka = async () => {
+  try {
+    await run();
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+}
+
+export const stopKafka = async () => {
+  await producer.disconnect();
+  await consumer.disconnect();
+  console.log('Producer and Consumer disconnected');
+};
+
 // run().catch(console.error);
 
 // ส่งข้อความ

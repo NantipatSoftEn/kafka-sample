@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { startKafka, stopKafka } from '../lib/kafka';
+
 
 export const  Form = ()  => {
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    startKafka();
+    return () => {
+      stopKafka().then(() => {
+        console.log('Kafka stopped successfully');
+      }).catch((error) => {
+        console.error('Error stopping Kafka:', error);
+      });
+    };
+  }, []); // Empty dependency array ensures this runs only once
+  
   const sendMessage = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
